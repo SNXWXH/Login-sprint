@@ -1,0 +1,11 @@
+
+# GET http://localhost:3000
+
+### user - create
+POST http://localhost:3000/users/signup
+Content-Type: application/json
+
+{
+    "email": "asd@sdf.com",
+    "passwd": "1234"
+}
