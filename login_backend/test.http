@@ -6,6 +6,9 @@ POST http://localhost:3000/users/signup
 Content-Type: application/json
 
 {
-    "email": "asdd11@sdf.com",
-    "passwd": "1234"
+    "email": "asdd12@sdf.com",
+    "passwd": "12345"
 }
+
+### user email check
+GET http://localhost:3000/users/signup/check?email=asdd1@sdf.com
