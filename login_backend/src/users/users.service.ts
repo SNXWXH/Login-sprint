@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpCode, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { EntityManager, Repository } from 'typeorm';
@@ -13,7 +13,11 @@ export class UsersService {
   ) {}
   create(createUserDto: CreateUserDto) {
     const user = new User({ ...createUserDto });
-    return this.entityManager.save(user);
+    this.entityManager.save(user);
+    return {
+      status: HttpStatus.CREATED,
+      message: '회원가입이 완료되었습니다',
+    };
   }
 
   findAll() {
