@@ -1,9 +1,4 @@
-import {
-  HttpCode,
-  HttpStatus,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { EntityManager, Repository } from 'typeorm';
@@ -18,8 +13,10 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
+    // const { email } = createUserDto;
+    // console.log('🚀  email:', email);
     const user = new User({ ...createUserDto });
-    const emailCheck = await this.findByEmail(user.email);
+    const emailCheck = await this.getUser(user.email);
     if (emailCheck) {
       return {
         status: HttpStatus.CONFLICT,
@@ -34,20 +31,29 @@ export class UsersService {
     };
   }
 
-  async findByEmail(email: string) {
+  async getUser(email: string) {
     const findEmail = await this.entityManager.findOne(User, {
       where: { email },
     });
-    if (!findEmail) throw new NotFoundException('존재하지 않는 유저입니다.');
     return findEmail;
   }
 
-  async verify(email: string, pw: string) {
-    const { passwd } = await this.findByEmail(email);
+  async verify({ email, passwd }) {
+    const user = await this.getUser(email);
+    const { email: userEmail } = user;
+    console.log('🚀  user:', user);
+    if (!user)
+      return {
+        status: HttpStatus.BAD_REQUEST,
+        message: '존재하지 않는 회원입니다',
+      };
+
+    const { passwd: pw } = await this.getUser(email);
     return passwd === pw
       ? {
           status: HttpStatus.OK,
           message: '로그인 되었습니다.',
+          userEmail,
         }
       : {
           status: HttpStatus.BAD_REQUEST,
