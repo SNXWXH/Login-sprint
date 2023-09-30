@@ -1,4 +1,3 @@
-import BackgroundForm from "./signup/Background";
-import inputBox from "./signup/Input";
+import BackgroundForm from "./signup/SignUp";
 
-export { BackgroundForm, inputBox };
+export { BackgroundForm };

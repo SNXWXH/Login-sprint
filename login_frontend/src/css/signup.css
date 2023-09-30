@@ -1,20 +1,17 @@
-.wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100dvh;
-}
-
 .backgroundForm {
   width: 500px;
   height: 500px;
   background-color: #454343;
   color: white;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
 }
 
+.backgroundForm-ment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+/* 
 .backgroundForm-signup,
 .backgroundForm-ment {
   display: flex;
@@ -27,4 +24,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */

@@ -1,11 +1,11 @@
 import React from "react";
 import "../css/signup.css";
-import BackgroundForm from "../components/signup/Background";
+import SignUpForm from "../components/signup/SignUp";
 
 export const SignUp = () => {
   return (
     <>
-      <BackgroundForm />
+      <SignUpForm />
     </>
   );
 };

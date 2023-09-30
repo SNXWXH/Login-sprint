@@ -1,4 +1,4 @@
-import BackgroundForm from "../components/signup/Background";
+import BackgroundForm from "../components/signup/SignUp";
 import { SignUp } from "./SignUp";
 import ROUTES from "../routes/routes";
 
