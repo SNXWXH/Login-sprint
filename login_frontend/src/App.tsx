@@ -8,7 +8,6 @@ import { PAGE_LIST } from "./pages";
 function App() {
   const routes = useRoutes(PAGE_LIST);
   return routes;
-  // return <div className="App">야야아앙</div>;
 }
 
 export default App;

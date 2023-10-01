@@ -1,11 +1,11 @@
 const ROUTES = {
   LOGIN: {
     PATH: "/login",
-    // NAME: "Login",
+    NAME: "Login",
   },
   SIGN_UP: {
     PATH: "/signup",
-    // NAME: "SignUp",
+    NAME: "SignUp",
   },
 };
 
