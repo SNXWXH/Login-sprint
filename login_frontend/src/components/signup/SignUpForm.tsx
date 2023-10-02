@@ -18,7 +18,7 @@ import {
   signUp_extrament,
   button_back,
   button_signup,
-} from "../../css/signUpCss";
+} from "../../css/signupCss";
 
 const SignUpForm = () => {
   // const [email, setEmail] = useState("");

@@ -42,6 +42,7 @@ export const signUp_signUp: React.CSSProperties = {
   fontSize: "24px",
   fontWeight: 700,
   marginBottom: "20px",
+  marginTop: "-10px",
 };
 
 export const signup_formsize: React.CSSProperties = {
