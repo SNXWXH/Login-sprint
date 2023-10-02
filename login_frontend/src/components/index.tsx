@@ -1,3 +1,4 @@
 import LoginBg from "./login/LoginBg";
+import SignUpForm from "./signup/SignUpForm";
 
-export { LoginBg };
+export { LoginBg, SignUpForm };

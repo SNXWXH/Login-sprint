@@ -7,7 +7,7 @@ import {
   login_input,
   login_title,
   login_lost,
-} from "../../css/login";
+} from "../../css/loginCss";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { naver, kakao, google, github } from "../../img";
 
@@ -20,7 +20,7 @@ const onFinishFailed = (errorInfo: any) => {
 };
 
 type FieldType = {
-  username?: string;
+  email?: string;
   password?: string;
   remember?: string;
 };
@@ -42,8 +42,8 @@ const LoginBg = () => {
           autoComplete="off"
         >
           <Form.Item<FieldType>
-            name="username"
-            rules={[{ required: true, message: "Please input your username!" }]}
+            name="email"
+            rules={[{ required: true, message: "Please input your email!" }]}
           >
             <Input
               style={login_input}

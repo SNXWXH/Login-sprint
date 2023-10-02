@@ -1,13 +1,9 @@
-// import React from "react";
+import { PAGE_LIST } from "./pages/index";
 import { useRoutes } from "react-router-dom";
 
-import { PAGE_LIST } from "./pages";
-
-// import "./App.css";
-
-function App() {
+const App = () => {
   const routes = useRoutes(PAGE_LIST);
   return routes;
-}
+};
 
 export default App;
