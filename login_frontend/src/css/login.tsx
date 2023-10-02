@@ -13,15 +13,35 @@ export const login_bg: React.CSSProperties = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  flexDirection: "column",
 };
 
 export const login_formsize: React.CSSProperties = {
-  width: 345,
+  width: "345px",
 };
 
 export const login_btn: React.CSSProperties = {
-  width: 345,
+  width: "345px",
+  height: "40px",
   backgroundColor: "#F6C54D",
-  color: "#222121",
-  font: "400",
+  color: "#000000",
+  fontWeight: "700",
+};
+
+export const login_input: React.CSSProperties = {
+  height: 40,
+};
+
+export const login_title: React.CSSProperties = {
+  color: "white",
+  fontSize: "24px",
+  fontWeight: 700,
+  marginBottom: "20px",
+};
+
+export const login_lost: React.CSSProperties = {
+  width: "345px",
+  display: "flex",
+  justifyContent: "space-between",
+  marginTop: "20px",
 };
