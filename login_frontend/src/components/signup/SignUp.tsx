@@ -1,12 +1,24 @@
 import React, { useState } from "react";
-import { Button, Form, Input, Layout, Space } from "antd";
+import { Button, Checkbox, Form, Input, Layout, Space } from "antd";
 import {
   EyeInvisibleOutlined,
   EyeTwoTone,
   LockOutlined,
   MailOutlined,
 } from "@ant-design/icons";
-import { backgroundForm, wrapper } from "../../css/SignUpCss";
+import {
+  backgroundForm,
+  wrapper,
+  signUp_ment,
+  signUp_input_id,
+  signUp_input_pw,
+  signUp_input_pwCheck,
+  signUp_signUp,
+  signup_formsize,
+  signUp_extrament,
+  button_back,
+  button_signup,
+} from "../../css/SignUpCss";
 
 const SignUpForm = () => {
   // const [email, setEmail] = useState("");
@@ -45,103 +57,106 @@ const SignUpForm = () => {
 
   return (
     <>
-      <Layout style={wrapper}>
+      <div style={wrapper}>
         <div style={backgroundForm}>
-          <p className="backgroundForm-ment">
-            스터디 관리 어플의 회원이 되어주세요!
-          </p>
-          <h1>회원가입</h1>
-          <br></br>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
+          <p style={signUp_ment}>스터디 관리 어플의 회원이 되어주세요!</p>
+          <h1 style={signUp_signUp}>회원가입</h1>
+          <Form
+            name="basic"
+            style={signup_formsize}
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
           >
-            <Form
-              name="basic"
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              style={{ maxWidth: 600 }}
-              initialValues={{ remember: true }}
-              onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
-              autoComplete="off"
+            <Form.Item<FieldType>
+              name="username"
+              rules={[
+                { required: true, message: "Please input your username!" },
+              ]}
             >
-              <Space direction="vertical">
-                <Input
-                  style={{ width: 345 }}
-                  size="large"
-                  type="text"
-                  placeholder="이메일을 입력해주세요."
-                  prefix={<MailOutlined />}
-                  // value={email}
-                  // onChange={handleEmailChange}
-                  // autoFocus={true}
-                />
-                <p style={{ fontSize: "12px" }}>
-                  사용자 이메일은 반드시 @를 포함하여야 합니다.
-                </p>
-                <Input.Password
-                  style={{ width: 345 }}
-                  size="large"
-                  type="password"
-                  placeholder="비밀번호를 입력해주세요."
-                  prefix={<LockOutlined />}
-                  iconRender={(visible) =>
-                    visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-                  }
-                  // value={password}
-                  // onChange={handlePasswordChange}
-                />
-                <Input.Password
-                  style={{ width: 345 }}
-                  size="large"
-                  placeholder="확인을 위해 비밀번호를 한번 더 입력해주세요."
-                  prefix={<LockOutlined />}
-                  iconRender={(visible) =>
-                    visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-                  }
-                  // value={checkPassword}
-                  // onChange={handleCheckPasswordChange}
-                />
-                <p style={{ fontSize: "12px" }}>
-                  비밀번호는 하나 이상의 특수문자 포함, 8~20자 이내여야 합니다.
-                </p>
-              </Space>
-            </Form>
-            <br />
-            <br />
-            <Space wrap>
-              <Button
-                type="primary"
-                size="large"
+              <Input
+                style={signUp_input_id}
+                type="text"
+                placeholder="이메일을 입력해주세요."
+                prefix={<MailOutlined style={{ color: "#9F9C9C" }} />}
+                // value={email}
+                // onChange={handleEmailChange}
+                // autoFocus={true}
+              />
+            </Form.Item>
+            <p style={signUp_extrament}>
+              사용자 이메일은 반드시 @를 포함하여야 합니다.
+            </p>
+            <Form.Item<FieldType>
+              name="password"
+              rules={[
+                { required: true, message: "Please input your password!" },
+              ]}
+            >
+              <Input.Password
+                style={signUp_input_pw}
+                type="password"
+                placeholder="비밀번호를 입력해주세요."
+                prefix={<LockOutlined style={{ color: "#9F9C9C" }} />}
+                iconRender={(visible) =>
+                  visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+                }
+                // value={password}
+                // onChange={handlePasswordChange}
+              />
+            </Form.Item>
+            <Form.Item<FieldType>
+              name="password"
+              rules={[
+                { required: true, message: "Please input your password!" },
+              ]}
+            >
+              <Input.Password
+                style={signUp_input_pwCheck}
+                placeholder="확인을 위해 비밀번호를 한번 더 입력해주세요."
+                prefix={<LockOutlined style={{ color: "#9F9C9C" }} />}
+                iconRender={(visible) =>
+                  visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+                }
+                // value={checkPassword}
+                // onChange={handleCheckPasswordChange}
+              />
+            </Form.Item>
+            <p style={signUp_extrament}>
+              비밀번호는 하나 이상의 특수문자 포함, 8~20자 이내여야 합니다.
+            </p>
+            <Form.Item<FieldType>
+              name="remember"
+              valuePropName="checked"
+              style={{ marginTop: "-20px" }}
+            >
+              <Checkbox
                 style={{
-                  backgroundColor: "#585656",
-                  fontSize: "16px",
-                  fontWeight: "bold",
+                  color: "white",
+                  fontSize: "12px",
+                  marginTop: "40px",
                 }}
               >
-                돌아가기
-              </Button>
-              <Button
-                type="primary"
-                size="large"
-                style={{
-                  backgroundColor: "#F6C54D",
-                  fontSize: "16px",
-                  color: "#000000",
-                  fontWeight: "bold",
-                }}
-                // onClick={axiosSignUp}
-              >
-                가입
-              </Button>
-            </Space>
-          </div>
+                개인정보 수집 및 이용에 동의합니다.
+              </Checkbox>
+            </Form.Item>
+          </Form>
+
+          <Space wrap>
+            <Button type="primary" style={button_back}>
+              돌아가기
+            </Button>
+            <Button
+              type="primary"
+              style={button_signup}
+              // onClick={axiosSignUp}
+            >
+              가입
+            </Button>
+          </Space>
         </div>
-      </Layout>
+      </div>
     </>
   );
 };
