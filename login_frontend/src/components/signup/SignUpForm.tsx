@@ -44,20 +44,34 @@ const SignUpForm = () => {
   //   const checkPassword = event.target.value;
   //   setCheckPassword(checkPassword);
   // };
-  const { mutateAsync, isLoading } = useMutation(async (signupData) => {
-    const response = await API({
+  // const { mutateAsync, isLoading } = useMutation(
+  //   async (signupData: SignupRequest) => {
+  //     const response = await API({
+  //       method: "post",
+  //       url: "/users",
+  //       data: signupData,
+  //     });
+  //     return response.data;
+  //   }
+  // );
+
+  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   const signupData: SignupRequest = { email, password };
+  //   return mutateAsync(signupData);
+  // };
+
+  const handleSubmit = async (signupData: SignupRequest) => {
+    const res = await API({
       method: "post",
       url: "/users",
       data: signupData,
     });
-    return response.data;
-  });
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const signupData: SignupRequest = { email, password };
-    return mutateAsync(signupData);
+    return res.data;
   };
+
+  const { mutate } = useMutation(handleSubmit);
 
   // const handleChange = () => {};
 
@@ -85,7 +99,7 @@ const SignUpForm = () => {
             name="basic"
             style={signup_formsize}
             initialValues={{ remember: true }}
-            onFinish={handleSubmit}
+            onFinish={(data) => mutate(data)}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
@@ -173,7 +187,7 @@ const SignUpForm = () => {
                   type="primary"
                   htmlType="submit"
                   style={button_signup}
-                  disabled={isLoading}
+                  // disabled={isLoading}
                   // onClick={axiosSignUp}
                 >
                   가입
