@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Button, Checkbox, Form, Input, Layout, Space } from "antd";
+import { API } from "../../axios-create";
+import { useMutation } from "@tanstack/react-query";
 import {
   EyeInvisibleOutlined,
   EyeTwoTone,
@@ -19,21 +21,22 @@ import {
   button_back,
   button_signup,
 } from "../../css/signCss";
+import { SignupRequest } from "../../types/ISignUp";
 
 const SignUpForm = () => {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   // const [checkPassword, setCheckPassword] = useState("");
 
-  // const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const email = event.target.value;
-  //   setEmail(email);
-  // };
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const email = event.target.value;
+    setEmail(email);
+  };
 
-  // const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const password = event.target.value;
-  //   setPassword(password);
-  // };
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const password = event.target.value;
+    setPassword(password);
+  };
 
   // const handleCheckPasswordChange = (
   //   event: React.ChangeEvent<HTMLInputElement>
@@ -41,6 +44,23 @@ const SignUpForm = () => {
   //   const checkPassword = event.target.value;
   //   setCheckPassword(checkPassword);
   // };
+  const { mutateAsync, isLoading } = useMutation(async (signupData) => {
+    const response = await API({
+      method: "post",
+      url: "/users",
+      data: signupData,
+    });
+    return response.data;
+  });
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const signupData: SignupRequest = { email, password };
+    return mutateAsync(signupData);
+  };
+
+  // const handleChange = () => {};
+
   const onFinish = (values: any) => {
     console.log("Success:", values);
   };
@@ -65,7 +85,7 @@ const SignUpForm = () => {
             name="basic"
             style={signup_formsize}
             initialValues={{ remember: true }}
-            onFinish={onFinish}
+            onFinish={handleSubmit}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
@@ -80,8 +100,9 @@ const SignUpForm = () => {
                 type="text"
                 placeholder="이메일을 입력해주세요."
                 prefix={<MailOutlined style={{ color: "#9F9C9C" }} />}
-                // value={email}
-                // onChange={handleEmailChange}
+                name="email"
+                value={email}
+                onChange={handleEmailChange}
                 // autoFocus={true}
               />
             </Form.Item>
@@ -102,8 +123,9 @@ const SignUpForm = () => {
                 iconRender={(visible) =>
                   visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
                 }
-                // value={password}
-                // onChange={handlePasswordChange}
+                name="passwd"
+                value={password}
+                onChange={handlePasswordChange}
               />
             </Form.Item>
             <Form.Item<FieldType>
@@ -119,6 +141,7 @@ const SignUpForm = () => {
                 iconRender={(visible) =>
                   visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
                 }
+                name="passwdCheck"
                 // value={checkPassword}
                 // onChange={handleCheckPasswordChange}
               />
@@ -141,20 +164,23 @@ const SignUpForm = () => {
                 개인정보 수집 및 이용에 동의합니다.
               </Checkbox>
             </Form.Item>
+            <Form.Item>
+              <Space wrap>
+                <Button type="primary" style={button_back}>
+                  돌아가기
+                </Button>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  style={button_signup}
+                  disabled={isLoading}
+                  // onClick={axiosSignUp}
+                >
+                  가입
+                </Button>
+              </Space>
+            </Form.Item>
           </Form>
-
-          <Space wrap>
-            <Button type="primary" style={button_back}>
-              돌아가기
-            </Button>
-            <Button
-              type="primary"
-              style={button_signup}
-              // onClick={axiosSignUp}
-            >
-              가입
-            </Button>
-          </Space>
         </div>
       </div>
     </>
