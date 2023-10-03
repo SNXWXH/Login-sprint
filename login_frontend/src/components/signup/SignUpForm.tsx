@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Button, Checkbox, Form, Input, Layout, Space } from "antd";
+import React from "react";
+import { Button, Checkbox, Form, Input, Space } from "antd";
 import { API } from "../../axios-create";
 import { useMutation } from "@tanstack/react-query";
 import {
@@ -21,46 +21,9 @@ import {
   button_back,
   button_signup,
 } from "../../css/signCss";
-import { SignupRequest } from "../../types/ISignUp";
+import { FieldType, SignupRequest } from "../../types/ISignUp";
 
 const SignUpForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  // const [checkPassword, setCheckPassword] = useState("");
-
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const email = event.target.value;
-    setEmail(email);
-  };
-
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const password = event.target.value;
-    setPassword(password);
-  };
-
-  // const handleCheckPasswordChange = (
-  //   event: React.ChangeEvent<HTMLInputElement>
-  // ) => {
-  //   const checkPassword = event.target.value;
-  //   setCheckPassword(checkPassword);
-  // };
-  // const { mutateAsync, isLoading } = useMutation(
-  //   async (signupData: SignupRequest) => {
-  //     const response = await API({
-  //       method: "post",
-  //       url: "/users",
-  //       data: signupData,
-  //     });
-  //     return response.data;
-  //   }
-  // );
-
-  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   const signupData: SignupRequest = { email, password };
-  //   return mutateAsync(signupData);
-  // };
-
   const handleSubmit = async (signupData: SignupRequest) => {
     const res = await API({
       method: "post",
@@ -73,22 +36,6 @@ const SignUpForm = () => {
 
   const { mutate } = useMutation(handleSubmit);
 
-  // const handleChange = () => {};
-
-  const onFinish = (values: any) => {
-    console.log("Success:", values);
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
-
-  type FieldType = {
-    username?: string;
-    password?: string;
-    remember?: string;
-  };
-
   return (
     <>
       <div style={wrapper}>
@@ -98,13 +45,16 @@ const SignUpForm = () => {
           <Form
             name="basic"
             style={signup_formsize}
-            initialValues={{ remember: true }}
-            onFinish={(data) => mutate(data)}
-            onFinishFailed={onFinishFailed}
+            onFinish={(data) => {
+              console.log("🚀  data:", data);
+
+              mutate(data);
+            }}
+            // onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
             <Form.Item<FieldType>
-              name="username"
+              name="email"
               rules={[
                 { required: true, message: "Please input your username!" },
               ]}
@@ -114,10 +64,6 @@ const SignUpForm = () => {
                 type="text"
                 placeholder="이메일을 입력해주세요."
                 prefix={<MailOutlined style={{ color: "#9F9C9C" }} />}
-                name="email"
-                value={email}
-                onChange={handleEmailChange}
-                // autoFocus={true}
               />
             </Form.Item>
             <p style={signUp_extrament}>
@@ -137,13 +83,9 @@ const SignUpForm = () => {
                 iconRender={(visible) =>
                   visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
                 }
-                name="passwd"
-                value={password}
-                onChange={handlePasswordChange}
               />
             </Form.Item>
-            <Form.Item<FieldType>
-              name="password"
+            <Form.Item
               rules={[
                 { required: true, message: "Please input your password!" },
               ]}
@@ -155,16 +97,13 @@ const SignUpForm = () => {
                 iconRender={(visible) =>
                   visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
                 }
-                name="passwdCheck"
-                // value={checkPassword}
-                // onChange={handleCheckPasswordChange}
               />
             </Form.Item>
             <p style={signUp_extrament}>
               비밀번호는 하나 이상의 특수문자 포함, 8~20자 이내여야 합니다.
             </p>
             <Form.Item<FieldType>
-              name="remember"
+              name="personalInfo"
               valuePropName="checked"
               style={{ marginTop: "-20px" }}
             >
@@ -188,7 +127,6 @@ const SignUpForm = () => {
                   htmlType="submit"
                   style={button_signup}
                   // disabled={isLoading}
-                  // onClick={axiosSignUp}
                 >
                   가입
                 </Button>
