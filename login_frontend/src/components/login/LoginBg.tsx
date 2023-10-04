@@ -13,6 +13,7 @@ import { naver, kakao, google, github } from "../../img";
 import { SignupRequest } from "../../types/ISignUp";
 import { API } from "../../axios-create";
 import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 type FieldType = {
   email?: string;
@@ -21,16 +22,23 @@ type FieldType = {
 };
 
 const LoginBg = () => {
+  const navigate = useNavigate();
+
   const handleLoginSubmit = async (loginData: SignupRequest) => {
     const res = await API({
       method: "post",
       url: "/auth",
       data: loginData,
     });
+
     return res.data;
   };
 
-  const { mutate } = useMutation(handleLoginSubmit);
+  const { mutate, isLoading } = useMutation(handleLoginSubmit);
+
+  const handleNavMain = () => {
+    navigate("/");
+  };
 
   return (
     <div style={login_wrapper}>
@@ -79,7 +87,12 @@ const LoginBg = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" style={login_btn}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={login_btn}
+              disabled={isLoading}
+            >
               로그인
             </Button>
           </Form.Item>

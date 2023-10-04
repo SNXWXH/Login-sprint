@@ -1,4 +1,8 @@
 const ROUTES = {
+  MAIN: {
+    PATH: "/",
+    NAME: "Main",
+  },
   LOGIN: {
     PATH: "/login",
     NAME: "Login",

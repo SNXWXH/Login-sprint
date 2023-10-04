@@ -1,6 +1,7 @@
 import { SignUpForm, LoginBg } from "../components";
 import { ROUTES } from "../routes";
 import { Login } from "./Login";
+import { Main } from "./Main";
 import { SignUp } from "./SignUp";
 
 interface Route {
@@ -27,5 +28,9 @@ export const PAGE_LIST: Route[] = [
         element: <SignUpForm />,
       },
     ],
+  },
+  {
+    path: ROUTES.MAIN.PATH,
+    element: <Main />,
   },
 ];
