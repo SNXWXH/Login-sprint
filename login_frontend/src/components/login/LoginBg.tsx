@@ -10,14 +10,9 @@ import {
 } from "../../css/loginCss";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { naver, kakao, google, github } from "../../img";
-
-const onFinish = (values: any) => {
-  console.log("Success:", values);
-};
-
-const onFinishFailed = (errorInfo: any) => {
-  console.log("Failed:", errorInfo);
-};
+import { SignupRequest } from "../../types/ISignUp";
+import { API } from "../../axios-create";
+import { useMutation } from "@tanstack/react-query";
 
 type FieldType = {
   email?: string;
@@ -25,9 +20,18 @@ type FieldType = {
   remember?: string;
 };
 
-// const { Content, Header, Sider } = Layout;
-
 const LoginBg = () => {
+  const handleLoginSubmit = async (loginData: SignupRequest) => {
+    const res = await API({
+      method: "post",
+      url: "/auth",
+      data: loginData,
+    });
+    return res.data;
+  };
+
+  const { mutate } = useMutation(handleLoginSubmit);
+
   return (
     <div style={login_wrapper}>
       <div style={login_bg}>
@@ -37,8 +41,9 @@ const LoginBg = () => {
           style={login_formsize}
           name="basic"
           initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
+          onFinish={(data) => {
+            mutate(data);
+          }}
           autoComplete="off"
         >
           <Form.Item<FieldType>

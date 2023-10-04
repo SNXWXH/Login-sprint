@@ -46,11 +46,8 @@ const SignUpForm = () => {
             name="basic"
             style={signup_formsize}
             onFinish={(data) => {
-              console.log("🚀  data:", data);
-
               mutate(data);
             }}
-            // onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
             <Form.Item<FieldType>
