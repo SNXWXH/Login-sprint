@@ -8,21 +8,27 @@ export const Main = () => {
       url: "/users/req-user",
     });
 
-    console.log("🦄  res:", res);
+    console.log("🦄  res.data:", res.data);
     return res.data;
   };
 
-  const {
-    data: { email },
-    isLoading,
-  } = useQuery(["login-user"], getUserProfile);
+  const { data, status, isLoading } = useQuery(["login-user"], getUserProfile);
+
+  //   const { email } = data;
+
+  //   const {
+  //     data: { email },
+  //     isLoading,
+  //     status,
+  //   } = useQuery(["login-user"], getUserProfile);
+  console.log(status);
 
   return (
     <>
       {!isLoading ? (
         <>
           <div>Main</div>
-          <div>{email}</div>
+          <div>{data.email}</div>
         </>
       ) : (
         <p>Loading...</p>

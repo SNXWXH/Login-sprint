@@ -31,14 +31,11 @@ const LoginBg = () => {
       data: loginData,
     });
 
+    navigate("/");
     return res.data;
   };
 
   const { mutate, isLoading } = useMutation(handleLoginSubmit);
-
-  const handleNavMain = () => {
-    navigate("/");
-  };
 
   return (
     <div style={login_wrapper}>
