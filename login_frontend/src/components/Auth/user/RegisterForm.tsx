@@ -1,13 +1,13 @@
-import React from "react";
-import { Button, Checkbox, Form, Input, Space } from "antd";
-import { API } from "../../axios-create";
-import { useMutation } from "@tanstack/react-query";
+import React from 'react';
+import { Button, Checkbox, Form, Input, Space } from 'antd';
+import { API } from '../authAPI/authAPI';
+import { useMutation } from '@tanstack/react-query';
 import {
   EyeInvisibleOutlined,
   EyeTwoTone,
   LockOutlined,
   MailOutlined,
-} from "@ant-design/icons";
+} from '@ant-design/icons';
 import {
   backgroundForm,
   wrapper,
@@ -20,14 +20,14 @@ import {
   signUp_extrament,
   button_back,
   button_signup,
-} from "../../css/signCss";
-import { FieldType, SignupRequest } from "../../types/ISignUp";
+} from '../../../css/signCss';
+import { FieldType, SignupRequest } from '../../../types';
 
 const SignUpForm = () => {
   const handleSubmit = async (signupData: SignupRequest) => {
     const res = await API({
-      method: "post",
-      url: "/users",
+      method: 'post',
+      url: '/users',
       data: signupData,
     });
 
@@ -43,40 +43,40 @@ const SignUpForm = () => {
           <p style={signUp_ment}>스터디 관리 어플의 회원이 되어주세요!</p>
           <h1 style={signUp_signUp}>회원가입</h1>
           <Form
-            name="basic"
+            name='basic'
             style={signup_formsize}
             onFinish={(data) => {
               mutate(data);
             }}
-            autoComplete="off"
+            autoComplete='off'
           >
             <Form.Item<FieldType>
-              name="email"
+              name='email'
               rules={[
-                { required: true, message: "Please input your username!" },
+                { required: true, message: 'Please input your username!' },
               ]}
             >
               <Input
                 style={signUp_input_id}
-                type="text"
-                placeholder="이메일을 입력해주세요."
-                prefix={<MailOutlined style={{ color: "#9F9C9C" }} />}
+                type='text'
+                placeholder='이메일을 입력해주세요.'
+                prefix={<MailOutlined style={{ color: '#9F9C9C' }} />}
               />
             </Form.Item>
             <p style={signUp_extrament}>
               사용자 이메일은 반드시 @를 포함하여야 합니다.
             </p>
             <Form.Item<FieldType>
-              name="password"
+              name='password'
               rules={[
-                { required: true, message: "Please input your password!" },
+                { required: true, message: 'Please input your password!' },
               ]}
             >
               <Input.Password
                 style={signUp_input_pw}
-                type="password"
-                placeholder="비밀번호를 입력해주세요."
-                prefix={<LockOutlined style={{ color: "#9F9C9C" }} />}
+                type='password'
+                placeholder='비밀번호를 입력해주세요.'
+                prefix={<LockOutlined style={{ color: '#9F9C9C' }} />}
                 iconRender={(visible) =>
                   visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
                 }
@@ -84,13 +84,13 @@ const SignUpForm = () => {
             </Form.Item>
             <Form.Item
               rules={[
-                { required: true, message: "Please input your password!" },
+                { required: true, message: 'Please input your password!' },
               ]}
             >
               <Input.Password
                 style={signUp_input_pwCheck}
-                placeholder="확인을 위해 비밀번호를 한번 더 입력해주세요."
-                prefix={<LockOutlined style={{ color: "#9F9C9C" }} />}
+                placeholder='확인을 위해 비밀번호를 한번 더 입력해주세요.'
+                prefix={<LockOutlined style={{ color: '#9F9C9C' }} />}
                 iconRender={(visible) =>
                   visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
                 }
@@ -100,15 +100,15 @@ const SignUpForm = () => {
               비밀번호는 하나 이상의 특수문자 포함, 8~20자 이내여야 합니다.
             </p>
             <Form.Item<FieldType>
-              name="personalInfo"
-              valuePropName="checked"
-              style={{ marginTop: "-20px" }}
+              name='personalInfo'
+              valuePropName='checked'
+              style={{ marginTop: '-20px' }}
             >
               <Checkbox
                 style={{
-                  color: "white",
-                  fontSize: "12px",
-                  marginTop: "40px",
+                  color: 'white',
+                  fontSize: '12px',
+                  marginTop: '40px',
                 }}
               >
                 개인정보 수집 및 이용에 동의합니다.
@@ -116,12 +116,12 @@ const SignUpForm = () => {
             </Form.Item>
             <Form.Item>
               <Space wrap>
-                <Button type="primary" style={button_back}>
+                <Button type='primary' style={button_back}>
                   돌아가기
                 </Button>
                 <Button
-                  type="primary"
-                  htmlType="submit"
+                  type='primary'
+                  htmlType='submit'
                   style={button_signup}
                   // disabled={isLoading}
                 >

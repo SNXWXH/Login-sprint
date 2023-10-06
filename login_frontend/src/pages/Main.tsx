@@ -1,18 +1,18 @@
-import { useQuery } from "@tanstack/react-query";
-import { API } from "../axios-create";
+import { useQuery } from '@tanstack/react-query';
+import { API } from '../components/Auth/authAPI/authAPI';
 
 export const Main = () => {
   const getUserProfile = async () => {
     const res = await API({
-      method: "get",
-      url: "/users/req-user",
+      method: 'get',
+      url: '/users/req-user',
     });
 
-    console.log("🦄  res.data:", res.data);
+    console.log('🦄  res.data:', res.data);
     return res.data;
   };
 
-  const { data, status, isLoading } = useQuery(["login-user"], getUserProfile);
+  const { data, status, isLoading } = useQuery(['login-user'], getUserProfile);
 
   //   const { email } = data;
 

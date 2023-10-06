@@ -1,4 +1,4 @@
-import LoginBg from "./login/LoginBg";
-import SignUpForm from "./signup/SignUpForm";
+import LoginBg from './Auth/user/LoginForm';
+import SignUpForm from './Auth/user/RegisterForm';
 
 export { LoginBg, SignUpForm };
