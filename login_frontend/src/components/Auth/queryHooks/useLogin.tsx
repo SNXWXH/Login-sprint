@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { LoginType } from '../../../types';
 import { loginUser } from '../authAPI/authAPI';
-// import ROUTES from '../../../routes';
+import { ROUTES } from '../../../Common/constants';
 
 const useLogin = () => {
   const navigate = useNavigate();
@@ -9,7 +9,7 @@ const useLogin = () => {
     try {
       await loginUser(loginData);
 
-      navigate('/');
+      navigate(ROUTES.MAIN.PATH);
     } catch (err) {
       console.log('로그인 실패');
     }
