@@ -1,17 +1,11 @@
-export interface SignupRequest {
-  email: string;
-  password: string;
-}
-
-export interface SignupResponse {
-  status: number;
-  data: {
-    message: string;
-  };
-}
-
-export interface FieldType {
+export interface RegisterType {
   email?: string;
   password?: string;
   personalInfo?: string;
+}
+
+export interface LoginType {
+  email?: string;
+  password?: string;
+  remember?: boolean;
 }

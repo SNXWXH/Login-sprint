@@ -1,5 +1,5 @@
-import { LoginBg } from "../components";
+import { LoginForm } from '../components';
 
 export const Login = () => {
-  return <LoginBg />;
+  return <LoginForm />;
 };

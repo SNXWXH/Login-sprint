@@ -14,13 +14,6 @@ export const Main = () => {
 
   const { data, status, isLoading } = useQuery(['login-user'], getUserProfile);
 
-  //   const { email } = data;
-
-  //   const {
-  //     data: { email },
-  //     isLoading,
-  //     status,
-  //   } = useQuery(["login-user"], getUserProfile);
   console.log(status);
 
   return (

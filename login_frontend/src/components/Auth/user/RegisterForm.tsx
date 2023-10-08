@@ -1,6 +1,5 @@
-import React from 'react';
 import { Button, Checkbox, Form, Input, Space } from 'antd';
-import { API } from '../authAPI/authAPI';
+import { API, RegisterUser } from '../authAPI/authAPI';
 import { useMutation } from '@tanstack/react-query';
 import {
   EyeInvisibleOutlined,
@@ -20,21 +19,14 @@ import {
   signUp_extrament,
   button_back,
   button_signup,
-} from '../../../css/signCss';
-import { FieldType, SignupRequest } from '../../../types';
+} from '../authStyle/signCss';
+import { RegisterType } from '../../../types';
+import useRegister from '../queryHooks/useRegister';
 
 const SignUpForm = () => {
-  const handleSubmit = async (signupData: SignupRequest) => {
-    const res = await API({
-      method: 'post',
-      url: '/users',
-      data: signupData,
-    });
+  const { handleRegisterSubmit } = useRegister();
 
-    return res.data;
-  };
-
-  const { mutate } = useMutation(handleSubmit);
+  const { mutate } = useMutation(handleRegisterSubmit);
 
   return (
     <>
@@ -50,7 +42,7 @@ const SignUpForm = () => {
             }}
             autoComplete='off'
           >
-            <Form.Item<FieldType>
+            <Form.Item<RegisterType>
               name='email'
               rules={[
                 { required: true, message: 'Please input your username!' },
@@ -66,7 +58,7 @@ const SignUpForm = () => {
             <p style={signUp_extrament}>
               사용자 이메일은 반드시 @를 포함하여야 합니다.
             </p>
-            <Form.Item<FieldType>
+            <Form.Item<RegisterType>
               name='password'
               rules={[
                 { required: true, message: 'Please input your password!' },
@@ -99,7 +91,7 @@ const SignUpForm = () => {
             <p style={signUp_extrament}>
               비밀번호는 하나 이상의 특수문자 포함, 8~20자 이내여야 합니다.
             </p>
-            <Form.Item<FieldType>
+            <Form.Item<RegisterType>
               name='personalInfo'
               valuePropName='checked'
               style={{ marginTop: '-20px' }}

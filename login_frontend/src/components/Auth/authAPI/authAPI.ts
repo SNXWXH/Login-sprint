@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SignupRequest } from '../../../types';
+import { RegisterType, LoginType } from '../../../types';
 
 export const API = axios.create({
   baseURL: 'http://localhost:3000',
@@ -7,11 +7,20 @@ export const API = axios.create({
   withCredentials: true,
 });
 
-export const loginUser = async (loginData: SignupRequest) => {
+export const loginUser = async (loginData: LoginType) => {
   const { data } = await API({
     method: 'post',
     url: '/auth',
     data: loginData,
+  });
+  return data;
+};
+
+export const RegisterUser = async (registerData: RegisterType) => {
+  const { data } = await API({
+    method: 'post',
+    url: '/users',
+    data: registerData,
   });
   return data;
 };

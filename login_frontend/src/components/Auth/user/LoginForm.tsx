@@ -1,41 +1,21 @@
-import { Button, Checkbox, Form, Input, Space } from 'antd';
+import { Button, Checkbox, Form, Space } from 'antd';
 import {
   login_bg,
   login_btn,
   login_formsize,
   login_wrapper,
-  login_input,
   login_title,
   login_lost,
-} from '../../../css/loginCss';
-import { LockOutlined, MailOutlined } from '@ant-design/icons';
+} from '../authStyle/loginCss';
+
 import { useMutation } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
-
-// import naversvg from '../../../public/naver.svg';
-// import { API } from '../authAPI/authAPI';
-
 import useLogin from '../queryHooks/useLogin';
-import { SignupRequest } from '../../../types';
-import { loginUser } from '../authAPI/authAPI';
+import { EmailInput, PasswdInput } from '../../../Common/commonComp';
+import { LoginType } from '../../../types';
 
-type FieldType = {
-  email?: string;
-  password?: string;
-  remember?: string;
-};
-
-const LoginBg = () => {
-  const navigate = useNavigate();
-  // const { handleLoginSubmit } = useLogin();
-  const handleLoginSubmit = async (loginData: SignupRequest) => {
-    const res = await loginUser(loginData);
-
-    navigate('/');
-    return res.data;
-  };
-
-  const { mutate, isLoading } = useMutation(handleLoginSubmit);
+const LoginForm = () => {
+  const { handleLoginSubmit } = useLogin();
+  const { mutate } = useMutation(handleLoginSubmit);
 
   return (
     <div style={login_wrapper}>
@@ -51,29 +31,11 @@ const LoginBg = () => {
           }}
           autoComplete='off'
         >
-          <Form.Item<FieldType>
-            name='email'
-            rules={[{ required: true, message: 'Please input your email!' }]}
-          >
-            <Input
-              style={login_input}
-              prefix={<MailOutlined style={{ color: '#9F9C9C' }} />}
-              placeholder='이메일을 입력해주세요'
-            />
-          </Form.Item>
+          <EmailInput />
 
-          <Form.Item<FieldType>
-            name='password'
-            rules={[{ required: true, message: 'Please input your password!' }]}
-          >
-            <Input.Password
-              style={login_input}
-              prefix={<LockOutlined style={{ color: '#9F9C9C' }} />}
-              placeholder='비밀번호를 입력해주세요'
-            />
-          </Form.Item>
+          <PasswdInput />
 
-          <Form.Item<FieldType>
+          <Form.Item<LoginType>
             name='remember'
             valuePropName='checked'
             style={{ marginTop: '-20px' }}
@@ -135,4 +97,4 @@ const LoginBg = () => {
   );
 };
 
-export default LoginBg;
+export default LoginForm;
